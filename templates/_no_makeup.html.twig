@@ -1,0 +1,10 @@
+{# the minimal body that is designed for templates that do not need makup such as AJAX calls #}
+{% block content_body %}
+    {%endblock %}
+{# javascript files here #}
+{% block javascripts %}
+{{ include ("javascripts.html.twig")}}
+{%endblock javascripts %}
+<!-- javascript codes go into this block !-->
+{% block javascript_code %}
+{% endblock javascript_code %}

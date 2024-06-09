@@ -1,0 +1,49 @@
+{% extends 'comptebanque/main_layout.html.twig' %}
+
+{% block content_body %}
+    <h1>Liste des opérations Bancaires</h1>
+
+    <table>
+        <thead>
+            <tr>
+                
+                <th>Opération</th>
+                <th>Compte</th>
+                <th>Montant</th>
+                <th>Motif</th>
+                <th>Date</th>
+                <th>Caisse</th>
+                <th>Fait Par</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% set typeOpBanque=[{"libelle":"Versement Banque"},{"libelle":"Retrait  Banque"},{"libelle":"Virement Emis"},{"libelle":"Virement Reçu"}] %}
+        {% for opBanque in opBanques %}
+            <tr>
+                <td>{% if typeOpBanque[opBanque.typeOp-1] is defined %}
+        {{typeOpBanque[opBanque.typeOp-1].libelle}}
+                {%else%}Autre{%endif%}</td>
+                <td>{{ opBanque.compte }}</td>
+                <td>{{ opBanque.montant|nombre() }}</td>
+                <td>{{ opBanque.justif }}</td>
+                <td>{% if opBanque.date %}{{ opBanque.date|date('d/m/Y H:i') }}{% endif %}</td>
+                <td>{{ opBanque.caisse }}</td>
+                <td>{{ opBanque.user }}</td>
+                <td>
+                         <a href="{{ path('operation_banque_show', { 'id': opBanque.id }) }}">Détails</a>
+                        || <a href="{{ path('operation_banque_edit', { 'id': opBanque.id }) }}">Modifier</a>
+                        || <a href="{{ path('operation_banque_delete', { 'id': opBanque.id }) }}">Supprimer</a>
+                        
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('operation_banque_new') }}">Nouvelle Opération</a>
+        </li>
+    </ul>
+{% endblock %}

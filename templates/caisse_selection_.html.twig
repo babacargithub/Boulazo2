@@ -1,0 +1,159 @@
+
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!--IE Compatibility modes-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--Mobile first-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>{% if title is defined %}{{ title}}{% else %}Shop Golob One{% endif %}</title>
+    
+    <!-- Css files -->
+    <link rel="stylesheet" href="{{asset("css/bootstrap.css")}}">
+    <link rel="stylesheet" href="{{asset("css/jquery-ui.css")}}">
+    <link rel="stylesheet" type="text/css" href="{{asset("css/jquery-ui.theme.css")}}">
+    <link rel="stylesheet" href="{{asset("css/main.css")}}">
+    <link rel="stylesheet" href="{{asset("css/metisMenu.css")}}">
+  
+  </head>
+
+        <body class="  ">
+            <div class="bg-blue dark" id="wrap">
+                <div id="top">
+                    <!-- .navbar -->
+                    <nav class="navbar navbar-inverse navbar-static-top">
+                        <div class="container-fluid">
+                    
+                    
+                            <!-- Brand and toggle get grouped for better mobile display -->
+                            <header class="navbar-header">
+                    
+                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                                <a href="index.html" class="navbar-brand"><img  alt=""></a>
+                    
+                            </header>
+                    
+                    
+                    
+                            <div class="topnav">
+                               
+                               
+                                <div class="btn-group">
+                                    <span>{% if app.user %} {{app.user.username}}{% endif %}</span>
+                                    <a href="{{path("fos_user_security_logout")}}" data-toggle="tooltip" data-original-title="Logout" data-placement="bottom"
+                                       class="btn btn-metis-1 btn-sm">
+                                        <i class="glyphicon glyphicon-log-out">Déconnexion</i>
+                                    </a>
+                                </div>
+                                <div class="btn-group">
+                                    <a data-placement="bottom" data-original-title="Show / Hide Left" data-toggle="tooltip"
+                                       class="btn btn-primary btn-sm toggle-left" id="menu-toggle">
+                                        <i class="fa fa-bars"></i>
+                                    </a>
+                                    
+                                </div>
+                    
+                            </div>
+                    
+                    
+                    
+                    
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+
+        
+        <!-- /.nav -->
+    </div>
+                        </div>
+                        <!-- /.container-fluid -->
+                    </nav>
+                    <!-- /.navbar -->                        <header class="head">
+                                <div class="search-bar">
+                                    <form class="main-search" action="">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" placeholder="Live Search ...">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-primary btn-sm text-muted" type="button">
+                                                    <i class="fa fa-search"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </form>
+                                    <!-- /.main-search -->                                </div>
+                                <!-- /.search-bar -->
+                            <div class="main-bar">
+                                <h3>
+              <i class="fa fa-home"></i>&nbsp;
+           Golob One SMS
+          </h3>
+                            </div>
+                            <!-- /.main-bar -->
+                        </header>
+                        <!-- /.head -->
+                </div>
+                <!-- /#top -->
+                    <div id="left">
+                        <
+                    </div>
+                    <!-- /#left -->
+                <div id="content">
+                    <div class="outer">
+                        <div id="loader" style="display: none;"></div>
+                        <div id="modal" style="display: none;"></div>
+                        <div class="inner bg-light lter">
+                            <div class="col-lg-12">
+                            <div class="row">
+                                {% if errorMsg is defined and errorMsg is not null %}
+                                    <div class="alert col-12  alert-danger" style="border: 1px solid red">{{errorMsg}}</div>
+                                    {% endif %}
+                                    <h1 class="text-center text-bold">Vous êtes affacté à plusieurs boutiques<br>
+                                        Sélectionnez la boutique à accéder</h1>
+                                    <div class='text-bold text-center '>
+                                        {% if shops is defined and shops is not null %}
+                                            {% for shop in shops %}
+                                        <li><h3><a class="text-success text-bold" href="{{path("go_shop_access_authentication",{"id":shop.id})}}">{{shop.libelle|upper()}}</a></h3></li>
+                                        {%endfor %}
+                                        {%endif%}
+                                            </div>
+
+                                    </div>
+
+                            </div>
+                            </div>
+
+                        </div>
+                        <!-- /.inner -->
+                    </div>
+                    <!-- /.outer -->
+                </div>
+                <!-- /#content -->
+                    <div id="right" class="bg-light lter">
+                        
+                        <!-- /.well well-small -->
+                        <!-- .well well-small -->
+                        
+            </div>
+            <!-- /#wrap -->
+            
+            <!-- #helpModal -->
+           <!-- /.modal -->
+            <!-- /#helpModal -->
+            <!--jQuery -->
+          
+          <script src="{{asset("js/jquery.js")}}"></script>
+            <script src="{{asset("js/jquery-ui.min.js")}}"></script>
+            <script src="{{asset("js/bootstrap.js")}}"></script>
+<script src="{{asset("js/go_shop_functions.js")}}"></script>
+            <script src="{{asset("js/golob_one_db_js.js")}}"></script>
+        </body>
+
+</html>
+
+	

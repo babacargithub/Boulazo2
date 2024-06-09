@@ -1,0 +1,49 @@
+{% extends 'shop/main_layout.html.twig' %}
+
+{% block content_body %}
+    <h1>Liste des Boutiques</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Libelle</th>
+                <th>Adresse</th>
+                <th>Gerant</th>
+                <th>Horaire</th>
+                <th>Rccm</th>
+                <th>Ninea</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for shop in shops %}
+            <tr>
+                <td><a href="{{ path('boutique_show', { 'id': shop.id }) }}">{{ shop.id }}</a></td>
+                <td>{{ shop.libelle }}</td>
+                <td>{{ shop.adresse }}</td>
+                <td>{{ shop.gerant }}</td>
+                <td>{{ shop.horaire }}</td>
+                <td>{{ shop.rccm }}</td>
+                <td>{{ shop.ninea }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('boutique_show', { 'id': shop.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('boutique_edit', { 'id': shop.id }) }}">modifier</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('boutique_new') }}">Create a new shop</a>
+        </li>
+    </ul>
+{% endblock %}

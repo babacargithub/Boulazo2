@@ -1,0 +1,44 @@
+{% extends 'sortie/sortie_main_layout.html.twig' %}
+
+{% block content_body %}
+    <h1>Typesortie</h1>
+
+    <table class="table table-bordered table-striped">
+        <tbody>
+            <tr>
+                <th>Charge</th>
+                <td>{% if typeSortie.charge %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Id</th>
+                <td>{{ typeSortie.id }}</td>
+            </tr>
+            <tr>
+                <th>Libelle</th>
+                <td>{{ typeSortie.libelle }}</td>
+            </tr>
+            <tr>
+                <th>Commentaire</th>
+                <td>{{ typeSortie.commentaire }}</td>
+            </tr>
+            <tr>
+                <th>Categorie</th>
+                <td>{{ typeSortie.categorie }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('type_sortie_index') }}">Retour à la liste</a>
+        </li>
+        <li>
+            <a href="{{ path('type_sortie_edit', { 'id': typeSortie.id }) }}">Modifier</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Supprimer">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'entree/main_layout.html.twig' %}
+
+{% block content_body %}
+    <h1>Liste des types d'entrées</h1>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Libelle</th>
+                <th>Commentaire</th>
+                <th>Categorie</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for typeEntree in typeEntrees %}
+            <tr>
+                <td><a href="{{ path('type_entree_show', { 'id': typeEntree.id }) }}">{{ typeEntree.libelle }}</a></td>
+                <td>{{ typeEntree.commentaire }}</td>
+                <td>{{ typeEntree.categorie }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('type_entree_show', { 'id': typeEntree.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('type_entree_edit', { 'id': typeEntree.id }) }}">Modifier</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('type_entree_new') }}">Créer un nouveau type d'entrée</a>
+        </li>
+    </ul>
+{% endblock %}

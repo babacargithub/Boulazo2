@@ -1,0 +1,44 @@
+{% extends 'sortie/sortie_main_layout.html.twig' %}
+
+{% block content_body %}
+    <h1>Liste des Sorties</h1>
+    <h2>Total {{total|nombre()}}</h2>
+
+                <a class="btn btn-success" href="{{ path('sortie_new') }}">Enregistrer Nouvelle Sortie</a>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+              
+                <th>Caisse</th>
+                <th>Type Sortie</th>
+                <th>Montant</th>
+                <th>Beneficiaire</th>
+                <th>Motif</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for sortie in sorties %}
+            <tr>
+                <td>{{ sortie.caisse }}</td>
+                <td>{{ sortie.typeSortie }}</td>
+                <td>{{ sortie.montant }}</td>
+                <td>{{ sortie.beneficiaire }}</td> 
+                <td>{{ sortie.motif }}</td>
+                <td>{% if sortie.date %}{{ sortie.date|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                           <a href="{{ path('sortie_show', { 'id': sortie.id }) }}">Détails</a>||
+                           <a href="{{ path('sortie_edit', { 'id': sortie.id }) }}">Modifier</a>||
+                           <a href="{{ path('sortie_delete', { 'id': sortie.id }) }}">Supprimer</a>
+                           <a href="{{ path('sortie_show', { 'id': sortie.id }) }}">{{ sortie.justifUrl }}</a>
+                     
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}

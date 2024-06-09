@@ -1,0 +1,45 @@
+{% extends 'shop/main_layout.html.twig' %}
+
+{% block content_body %}
+    <h1>Liste des utilisateurs boutique</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Utilisateur</th>
+                <th>Désactivé</th>
+                <th>Vérrouillé</th>
+                <th>Dernière connexion</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for shopUser in shopUsers %}
+            <tr>
+                <td><a href="{{ path('shop_user_show', { 'id': shopUser.id }) }}">{{ shopUser.id }}</a></td>
+                <td>{{ shopUser.user }}</td>
+                <td>{% if shopUser.disabled %}Yes{% else %}No{% endif %}</td>
+                <td>{% if shopUser.locked %}Yes{% else %}No{% endif %}</td>
+                <td>{% if shopUser.lastLogin %}{{ shopUser.lastLogin|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('shop_user_show', { 'id': shopUser.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('shop_user_edit', { 'id': shopUser.id }) }}">modifier</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('shop_user_new') }}">Créer un nouvel utilisateur boutique</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "sortie/sortie_main_layout.html.twig"%}
+{% block content_body %}       
+{% if form is defined %}
+    <div class="col-lg-6">
+    <form action="{{ path('caisse_pro_sortie_search')}}" method="post">
+           {{ form_errors(form)}}
+            {{ form_widget(form)}} 
+    
+    <input type="submit" class="btn btn-primary" value="Rechercher"/>
+</form>
+    </div>
+    {% endif %}
+    {%endblock %}
+ 

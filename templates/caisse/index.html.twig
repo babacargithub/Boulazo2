@@ -1,0 +1,28 @@
+{% extends 'caisse/caisse_main_layout.html.twig' %}
+
+{% block content_body %}
+    <h1>Caisses list</h1>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+               <th>Libellé</th>
+                <th>Solde</th>
+                <th>Dernière Op</th>
+                <th>Visualiser</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+        {% for caisse in caisses %}
+            <tr>
+                 <td>{{ caisse.libelle }}</td>
+                <td>{{ caisse.solde|nombre() }}</td>
+                <td>{% if caisse.lastOp %}{{ caisse.lastOp|date('d-m-Y H:i:s') }}{% endif %}</td>
+                <td><a href="{{path("summary_caisse", {"id":caisse.id, "date_debut":'now'|date('Y-m-d'),"date_fin":'now'|date('Y-m-d',false)})}}">Résumé Mensuel</a></td>
+                
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

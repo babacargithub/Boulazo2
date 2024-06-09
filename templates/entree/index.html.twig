@@ -1,0 +1,50 @@
+{% extends 'entree/main_layout.html.twig' %}
+
+{% block content_body %}
+    <h1>Liste des entrées</h1>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Auteur</th>
+                <th>Libelle</th>
+                <th>Date</th>
+                <th>Montant</th>
+                <th>Commentaire</th>
+                <th>Type d'entrée</th>
+                <th>Caisse</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% dump(entrees) %}
+        {% for entree in entrees %}
+            <tr>
+                <td><a href="{{ path('entree_show', { 'id': entree.id }) }}">{{ entree.auteur }}</a></td>
+                <td>{{ entree.libelle }}</td>
+                <td>{% if entree.date %}{{ entree.date|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entree.montant }}</td>
+                <td>{{ entree.commentaire }}</td>
+                <td>{{ entree.typeEntree }}</td>
+                <td>{{ entree.caisse }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('entree_show', { 'id': entree.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('entree_edit', { 'id': entree.id }) }}">modifier</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('entree_new') }}">Enregistrer une nouvelle entrée</a>
+        </li>
+    </ul>
+{% endblock %}

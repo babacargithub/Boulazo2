@@ -1,0 +1,40 @@
+{% extends 'comptebanque/main_layout.html.twig' %}
+
+{% block content_body %}
+    <h1>Liste des Comptes Banque</h1>
+
+    <table class="">
+        <thead>
+            <tr>
+                <th>Libelle</th>
+                <th>Numcompte</th>
+                <th>Banque</th>
+                <th>Solde</th>
+                <th>Lastop</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for compteBanque in compteBanques %}
+            <tr>
+                <td>{{ compteBanque.libelle }}</td>
+                <td>{{ compteBanque.numCompte }}</td>
+                <td>{{ compteBanque.banque }}</td>
+                <td>{{ compteBanque.solde }}</td>
+                <td>{% if compteBanque.lastOp %}{{ compteBanque.lastOp|date('d/m/Y H:i:s') }}{% endif %}</td>
+                <td><a href="{{ path('compte_banque_show', { 'id': compteBanque.id }) }}">Résumé Mensuel</a>
+                ||<a href="{{ path('compte_banque_show', { 'id': compteBanque.id }) }}">Afficher</a>
+                    ||<a href="{{ path('compte_banque_edit', { 'id': compteBanque.id }) }}">Modifier</a>
+                       
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('compte_banque_new') }}">Ajouter un compte</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,36 @@
+    {% extends "sortie/sortie_main_layout.html.twig"%}
+{% block content_body %}          Sorties 
+        Total des sorties {% if total_sortie is defined%}{{total_sortie|nombre()}}
+        {%endif%}
+            <h2>Résumé sortie</h2>
+            
+        {% if sorties is defined %}
+            <table class="table table-bordered table-striped">
+                <tr >
+                        
+                    <th>Montant</th>
+                    <th>Libellé</th>
+                    <th>Justifications</th>
+                    <th>Date</th>
+                    <th>Effectué par</th>
+                    <th>Opérations</th>
+                </tr>
+                {% for sortie in sorties %}
+                    <tr id="row-{{ sortie.id }}">
+                        <td>{{sortie.montant|nombre() }}</td>
+                        <td>{{ sortie.typeSortie.libelle}}</td>
+                        <td>{{ sortie.motif }}</td>
+                        <td>{{ sortie.date.format('d/m/Y H:i')}}</td>
+                        <td>{{ sortie.user.prenom}}</td>
+                        
+                         <td>
+                           <a class="update_action" id="{{ sortie.id }}" href="{{ path('sortie_edit', {'id': sortie.id}) }}">Modifier</a>
+                            <a class="annuler_action" id="{{ sortie.id }}" href="{{ path('sortie_delete', {'id': sortie.id}) }}">Annuler</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+            </table>
+            {% else %}
+                <span>Liste undefined</span>
+    {% endif %}
+    {% endblock %}

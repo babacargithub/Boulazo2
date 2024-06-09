@@ -1,0 +1,17 @@
+{% extends 'caisse/caisse_main_layout.html.twig' %}
+
+{% block content_body %}
+    <h1>Création d'une nouvelle caisse</h1>
+<form action="{{path("caisse_pro_new")}}" method="post">
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Enregistrer" />
+    {{ form_end(form) }}
+</form>
+    <ul>
+        <li>
+            <a href="{{ path('caisse_pro_index') }}">Retour à la liste</a>
+        </li>
+    </ul>
+            <
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'layout.html.twig' %}
+
+{% block content_body %}
+    <h1>Typeoperation</h1>
+
+    <table class="table table-bordered table-striped">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ typeOperation.id }}</td>
+            </tr>
+            <tr>
+                <th>Libelle</th>
+                <td>{{ typeOperation.libelle }}</td>
+            </tr>
+            <tr>
+                <th>Commentaire</th>
+                <td>{{ typeOperation.commentaire }}</td>
+            </tr>
+            <tr>
+                <th>Categorie</th>
+                <td>{{ typeOperation.categorie }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('type_operation_index') }}">Retour à la liste</a>
+        </li>
+        <li>
+            <a href="{{ path('type_operation_edit', { 'id': typeOperation.id }) }}">Modifier</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Supprimer">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

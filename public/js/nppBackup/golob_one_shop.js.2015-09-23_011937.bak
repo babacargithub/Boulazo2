@@ -1,0 +1,514 @@
+$(document).ready(function ()
+		{
+			
+		
+//===============Activer popup pour les Options créance==================================
+  $('[data-toggle="popover"]').popover({trigger: "hover", placement: "left"});
+  $('.detail_creance').popover({trigger: "hover", placement: "left"});
+  
+	//===================================ACTUALISER PAGE SI MODULE EST TOTAUX =====================================
+	var id_module=$('#id_module').val();
+			if(id_module=="totaux")
+			{
+				setInterval('window.location.reload();', 300000);
+			}
+		//==================================Gerer les notifications quand ajax en charement==========================
+		
+				$(document).ajaxStart(function()
+						{
+								$('#loader').dialog({ height: 900, dialogClass: "no-close"}).position({
+																								  my: "center",
+																								  at: "center",
+																								//  of: "#contenu"
+																								});
+						}
+				);
+				$(document).ajaxComplete(function()
+						{
+								$('#loader').dialog('close');
+						}
+				);
+//==============================================FINCTION for alert messages==================
+				function show_alert(code_ajax)
+				{
+						if(code_ajax.match(/Erreur/))
+						{
+
+
+
+								$('.alert').addClass("alert-danger").removeClass('alert-success').css('border', '1px solid #B80000').show().html(code_ajax);
+								setTimeout(function()
+										{$('.alert').hide();
+										}, 10000
+								);
+						}
+						else
+						{
+								$('.alert').addClass("alert-success").removeClass('alert-danger').css('border', '1px solid green').show().html(code_ajax);
+								setTimeout(function()
+										{$('.alert').hide();
+										}, 10000
+								);
+						}
+
+						
+				}
+//=============================================== Gerer menu vertical==========================================
+				$('.yes').click(function(e)
+						{e.preventDefault(); $('#menu_vertical .active').removeClass('active');
+								$(this).addClass('active');
+								var id_el = $(this).attr('id');
+								$.ajax(
+										{url: 'operations.php',
+										dataType: 'html',
+										data: "id_op="+id_el,
+										type: 'GET',
+										success: function(reponse)
+												{$('#place_include').html(reponse);
+												},
+												//complete: function(reponse){  $('#contenu').html(reponse);},
+										error: function()
+												{$('#contenu').html("error");
+												}
+
+										}
+								);
+
+						}
+				);
+
+				// Setting "active" class fo menu items
+				$('#'+id_module).addClass('active');
+
+
+				//============================================Traiter formulaire vente===================================================================================
+				//||=====================================================================================================================================================
+				$('#prix_vente').keyup(
+						function()
+						{
+								if($('#prix_vente').val().length>=3)
+								{
+										$('#prix_vente_div').removeClass("has-error");
+
+
+								}
+								else
+								{
+
+								}
+						}
+
+				);
+				$('#id_type_produit_vente').on(
+						{change: function()
+								{
+										var id_type_produit = $(this, "option:selected").val();
+
+										$.ajax(
+												{
+												url: 'operations.php?liste_type_produit='+id_type_produit,
+												type: 'GET',
+
+														//data: id_type_produit,
+												dataType: 'html',
+												success: function(code, data, xch)
+														{
+
+																$('#numero_produit_vente').html(code);
+														},
+												error: function()
+														{alert("error");
+														},
+												complete: function()
+														{
+														}
+												}
+										);
+								}
+						}
+				);
+
+				$("#formulaire_vente").on(
+						{
+						submit: function(e)
+								{
+										e.preventDefault();
+
+										var length_prix_vente = $('#prix_vente').val();
+										if(length_prix_vente==0)
+										{
+												//$('#prix_vente').addClass('warning');
+												//if($("input").val().length < 4) {
+												$('#prix_vente_div').addClass("has-error");
+												show_alert("Erreur: tous les champs doivent être emplis");
+
+										}
+										else
+										{
+
+												$(this, '.form_group').removeClass("has-error");
+												var donnees = $(this).serialize();
+												$.ajax(
+														{
+														url: 'modules/vente/Controller-vente.php',
+														type: 'POST',
+														data: donnees,
+														dataType: 'html',
+														success: function(code, data, xch)
+																{
+																		show_alert(code);
+
+																},
+														error: function()
+																{alert("error");
+																},
+														complete: function()
+																{
+																}
+
+														}
+												);
+										}
+								}
+
+						}
+				);
+
+
+
+				$("#formulaire_vente_service").on(
+						{
+						submit: function(e)
+								{
+										e.preventDefault();
+
+										var length_prix_vente = $('#montant').val();
+										if(length_prix_vente==0)
+										{
+												//$('#prix_vente').addClass('warning');
+												//if($("input").val().length < 4) {
+												$('#montant_vente_div').addClass("has-error");
+												show_alert('Erreur:! Merci de remplir tous les champs');
+
+
+										}
+										else
+										{
+
+												$(this, '.form_group').removeClass("has-error");
+												var donnees = $(this).serialize();
+												$.ajax(
+														{
+														url: 'modules/vente/Controller-vente.php',
+														type: 'POST',
+														data: donnees,
+														dataType: 'html',
+														success: function(code, data, xch)
+																{
+																		$('.alert').addClass("alert-success").removeClass('alert-danger').css('border', '1px dotted green').show().html(code);
+																		setTimeout(function()
+																				{$('.alert').hide(); $('#prix_vente').val("");
+																				}, 5000
+																		);
+
+
+																},
+														error: function()
+																{alert("error");
+																},
+														complete: function()
+																{
+																}
+
+														}
+												);
+										}
+								}
+
+						}
+				);
+				//=============================FORMULAIRE AJOUTER PRODUIT============================================
+
+				$("#formulaire_ajouter_produit").on(
+						{
+						submit: function(e)
+								{
+										e.preventDefault();
+
+										var length_prix_vente = $('#nom_produit').val();
+										if(length_prix_vente==0)
+										{
+												//$('#prix_vente').addClass('warning');
+												//if($("input").val().length < 4) {
+												$('#nom_produit_div').addClass("has-error");
+												$("div.alert").addClass("alert-danger").removeClass('alert-success').css('border', '1px solid red').html('<strong>Erreur:! </strong> Merci de remplir tous les champs!').show("slow").delay(4000).hide("slow");
+
+
+										}
+										else
+										{
+
+												$(this, '.form_group').removeClass("has-error");
+												var donnees = $(this).serialize();
+												$.ajax(
+														{
+														url: 'modules/vente/Controller-vente.php',
+														type: 'POST',
+														data: donnees,
+														dataType: 'html',
+														success: function(code, data, xch)
+																{
+																		$('.alert').addClass("alert-success").removeClass('alert-danger').css('border', '1px dotted green').show().html(code);
+																		setTimeout(function()
+																				{$('.alert').hide();
+																				}, 5000
+																		);
+
+
+																},
+														error: function()
+																{alert("error");
+																},
+														complete: function()
+																{
+																}
+
+														}
+												);
+										}
+								}
+
+						}
+				);
+//===================================================FORMULAIRE ACHAT=============================================================================
+				$("#formulaire_achat").on(
+						{
+						submit: function(e)
+								{
+										e.preventDefault();
+
+										var length_prix_vente = $('#prix_achat').val();
+										if(length_prix_vente==0)
+										{
+												//$('#prix_vente').addClass('warning');
+												//if($("input").val().length < 4) {
+												$('#prix_achat').addClass("has-error");
+												$("div.alert").addClass("alert-danger").removeClass('alert-success').css('border', '1px solid red').html('<strong>Erreur:! </strong> Merci de remplir tous les champs!').show("slow").delay(4000).hide("slow");
+
+
+										}
+										else
+										{
+
+												$(this, '.form_group').removeClass("has-error");
+												var donnees = $(this).serialize();
+												$.ajax(
+														{
+														url: 'modules/vente/Controller-vente.php',
+														type: 'POST',
+														data: donnees,
+														dataType: 'html',
+														success: function(code, data, xch)
+																{
+																		if(code.match(/Erreur/))
+																		{
+
+
+																				$('.alert').addClass("alert-danger").removeClass('alert-success').css('border', '1px solid green').show().html(code);
+																				setTimeout(function()
+																						{$('.alert').hide();
+																						}, 10000
+																				);
+																		}
+																		else
+																		{
+																				$('.alert').addClass("alert-success").removeClass('alert-danger').css('border', '1px solid green').show().html(code);
+																				setTimeout(function()
+																						{$('.alert').hide();
+																						}, 10000
+																				);
+																		}
+
+																},
+														error: function()
+																{alert("error");
+																},
+														complete: function()
+																{
+																}
+
+														}
+												);
+										}
+								}
+
+						}
+				);
+				//=======================================SUPPRIMER VENTE====================
+				$("body").on('click', '.annuler_vente', function(e)
+						{
+								e.preventDefault();
+								var id_el = $(this).attr('id');
+
+								var r = confirm("Voulez-vous vraiment annuler m! cette vente?");
+								if(r==true)
+								{
+										$.ajax(
+												{url: 'modules/vente/Controller-vente.php',
+												dataType: 'html',
+												data: "id_vente_annule="+id_el,
+												type: 'GET',
+												success: function(reponse)
+														{show_alert(reponse);
+														},
+														//complete: function(reponse){  $('#contenu').html(reponse);},
+												error: function()
+														{$('#contenu').html("error");
+														}
+
+												}
+										);
+								}
+								else
+								{
+								}
+						}
+				);
+				//+++++++++++++++++++++++IMPRIMER TOTAL
+				$('#print_report').click(function()
+						{var myWindow = window.open("", "", "width=200, height=100"); myWindow.write('dddddddddddddd');
+						}
+				);
+				
+			//===============================================CREATING TAB MENUS=============================
+			//$('#tabs').tabs()
+			//.addClass('ui-tabs-horizontal ui-helper-clearfix');
+			//$('#menu_vertical').tabs();
+				//END
+		//========================================================FORMULAIRE CREANCE============================
+		$('#type_creance').on(
+						{change: function()
+								{
+										var id_type_produit = $(this, "option:selected").val();
+
+										if(id_type_produit==1)
+										{
+											$('#date_echeance_div').fadeIn();
+											$('#date_echeance').datepicker({ dateFormat: 'yy-mm-dd',   selectOtherMonths: true});
+										
+											
+										}
+										else
+										{ 
+											$('#date_echeance').val("");
+											$('#date_echeance_div ').hide();
+										}
+								}
+						}
+						
+						
+				);
+			$("#formulaire_ajouter_creance").on(
+						{
+						submit: function(e)
+								{
+										e.preventDefault();
+
+										var length_prix_vente = $('#montant_creance').val();
+										if(length_prix_vente==0)
+										{
+												//$('#prix_vente').addClass('warning');
+												//if($("input").val().length < 4) {
+												$('#montant_creance').addClass("has-error");
+												$("div.alert").addClass("alert-danger").removeClass('alert-success').css('border', '1px solid red').html('<strong>Erreur:! </strong> Merci de remplir tous les champs!').show("slow").delay(4000).hide("slow");
+
+
+										}
+										else
+										{
+
+												$(this, '.form_group').removeClass("has-error");
+												var donnees = $(this).serialize();
+												$.ajax(
+														{
+														url: 'modules/creance/Controller-creance.php',
+														type: 'POST',
+														data: donnees,
+														dataType: 'text',
+														success: function(reponse)
+																{
+																		show_alert(reponse);
+
+																},
+														error: function()
+																{alert("error");
+																},
+														complete: function()
+																{
+																}
+
+														}
+												);
+										}
+								}
+
+						}
+				);
+		//================================ Modal formulaire remboursement=======================================
+		$('.remb').click(function(){
+			var id=$(this).attr('id');
+			$('#id_creance').val(id);
+			
+		});
+		$('#formulaire_rembourser_creance').on(
+		{
+			submit: function(e)
+				{
+					e.preventDefault();
+					
+					var donnees = $(this).serialize();
+					$.ajax(
+					{
+						url: 'modules/creance/Controller-creance.php',
+																type: 'POST',
+																data: donnees,
+																dataType: 'html',
+																success: function(reponse)
+																		{
+																			$('#rembourser').modal('toggle');
+																				show_alert(reponse);
+
+																		},
+																error: function()
+																		{alert("error");
+																		},
+																complete: function()
+																		{
+																			
+																		}
+					}
+					
+					);
+				}
+		}
+		);
+		
+//==================================================GESTION DES Utilisateurs==============================================================================
+$('.ban_user').click(function(e){e.preventDefault();
+var id=$(this).attr('id');
+var r=confirm('Voulez-vous vraiment bloquer cet utilisateur?');
+if(r==true)
+{
+$.ajax({
+	type: "GET",
+	dataType: "html",
+	url: "admin/users/Controller-users.php?id_user_ban="+id,
+	success: function(reponse){show_alert(reponse);
+	}});
+}
+else
+{
+	e.preventDefault();
+}
+});
+});

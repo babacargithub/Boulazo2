@@ -1,0 +1,57 @@
+{% extends 'caisse_user/main_layout.html.twig' %}
+
+{% block content_body %}
+    <h1>Caisseusers list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>User</th>
+                <th>Caisse</th>
+                <th>Allowed</th>
+                <th>Openningat</th>
+                <th>Closingat</th>
+                <th>Accesslevel</th>
+                <th>Comments</th>
+                <th>Createdat</th>
+                <th>Deleted</th>
+                <th>Deletedat</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for caisseUser in caisseUsers %}
+            <tr>
+                <td><a href="{{ path('caisse_user_show', { 'id': caisseUser.id }) }}">{{ caisseUser.id }}</a></td>
+                <td>{{ caisseUser.user }}</td>
+                <td>{{ caisseUser.caisse }}</td>
+                <td>{% if caisseUser.allowed %}Yes{% else %}No{% endif %}</td>
+                <td>{% if caisseUser.openningAt %}{{ caisseUser.openningAt|date('H:i:s') }}{% endif %}</td>
+                <td>{% if caisseUser.closingAt %}{{ caisseUser.closingAt|date('H:i:s') }}{% endif %}</td>
+                <td>{{ caisseUser.accessLevel }}</td>
+                <td>{{ caisseUser.comments }}</td>
+                <td>{% if caisseUser.createdAt %}{{ caisseUser.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if caisseUser.deleted %}Yes{% else %}No{% endif %}</td>
+                <td>{% if caisseUser.deletedAt %}{{ caisseUser.deletedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('caisse_user_show', { 'id': caisseUser.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('caisse_user_edit', { 'id': caisseUser.id }) }}">modifier</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('caisse_user_new') }}">Create a new caisseUser</a>
+        </li>
+    </ul>
+{% endblock %}

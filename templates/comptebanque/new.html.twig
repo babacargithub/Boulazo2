@@ -1,0 +1,16 @@
+{% extends 'comptebanque/main_layout.html.twig' %}
+
+{% block content_body %}
+    <h1>Créer Un Nouveau Compte Bancaire</h1>
+<form action="{{path("compte_banque_new")}}" method="post">
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Enregistrer" />
+    {{ form_end(form) }}
+</form>
+    <ul>
+        <li>
+            <a href="{{ path('compte_banque_index') }}">Retour à la liste</a>
+        </li>
+    </ul>
+{% endblock %}

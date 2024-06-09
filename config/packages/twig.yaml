@@ -1,0 +1,15 @@
+twig:
+    file_name_pattern: '*.twig'
+    globals:
+        company_name: 'GSABoulangerie'
+        company_full_name: 'Groupe Sokhna Aida'
+        company_description: 'Boulangerie, Patisserie, Restauration'
+        company_logo_url: "images/logo_gsa.jpeg"
+        software_name: 'Boulazo'
+        software_description: 'Logiciel de Gestion de Caisse Boulangerie'
+        version_name: '1.0.0'
+    form_themes: [ 'bootstrap_4_layout.html.twig' ]
+
+when@test:
+    twig:
+        strict_variables: true

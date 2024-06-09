@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+{# include head #}
+{% include "_header.html.twig" %}
+{% set skin_color="blue" %}
+<body class="hold-transition skin-{% block skin_color %}blue {%endblock %} sidebar-mini  ">
+<div class="wrapper" style="min-height: 100%;">
+    {# include menu#}
+    {% if "mobile" in app.request.headers.get('User-Agent') %}
+    {%else%}
+
+    {%endif%}
+    {% block menu %}
+        {% include "_menu.html.twig" %}
+    {% endblock menu %}
+    <!-- Left side column. contains the logo and sidebar -->
+    {# include side bar#}
+    {% block sidebar %}
+        {% include "_sidebar.html.twig" %}
+    {%endblock sidebar %}
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <div id="loader" style="display: none;"></div>
+        <div id="modal" style="display: none;"></div>
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                {% block content_title %}{{software_name}} {%endblock %}
+                <small>{{software_description}}, v{{version_name}}</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i>{% block active_page %} Golob One{% endblock %}</a></li>
+                <li class="active">{% block active_page_description %}Contenu{%endblock%}</li>
+            </ol>
+            <!-- Error and success messages go here !-->
+            {% if msg is defined and msg is not null %}
+                <div  class='alert alert-success'><h4><i class="icon fa fa-check"></i>Message</h4>{{msg}}</div>
+            {%endif %}
+            {% if errorMsg is defined and errorMsg is not null %}
+                <div  class='alert alert-danger'><h4><i class="icon fa fa-warning"></i>Message Erreur</h4>{{errorMsg}} </div>
+            {%endif %}
+            {% for type, messages in app.session.flashbag.all() %}
+                {% for message in messages %}
+                    <div  class='alert alert-{{type}}'> {{ message }}</div>
+                {% endfor %}
+            {% endfor %}
+            {# thes divs sont crées pour afficher les messages d'erreur ou de succès en fonction des réponses des controllers
+Ils sont cachés par défaut #}
+            <div style="display: none" class="" id="error_msg"></div>
+            <div style="display: none" class="" id="success_msg"></div>
+
+        </section>
+
+        <!-- Main content -->
+        <section class="content" id="content_body">
+            {% block content_body %}
+            {%endblock content_body %}
+
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    {# include footer #}
+    {% include "_footer.html.twig" %}
+
+    <!-- Control Sidebar -->
+    {# include side bar controller #}
+    {%include '_control_sidebar.html.twig'%}
+    <!-- /.control-sidebar -->
+    <!-- Add the sidebar's background. This div must be placed
+         immediately after the control sidebar -->
+    <div class="control-sidebar-bg"></div>
+
+</div>
+<!-- ./wrapper -->
+{# javascript files here #}
+{% block javascripts %}
+    {{ include ("javascripts.html.twig")}}
+{%endblock javascripts %}
+<!-- javascript codes go into this block !-->
+{% block javascript_code %}
+{% endblock javascript_code %}
+
+</body>
+</html>

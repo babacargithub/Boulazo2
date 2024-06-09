@@ -1,0 +1,17 @@
+{% block extends %}
+{{ "{% extends 'base.html.twig' %}" }}
+{% endblock extends %}
+
+{% block content_body %}
+{{ "{% block content_body %}" }}
+    <h1>{{ entity_singularized|capitalize }} modifier</h1>
+
+    {{ '{{ form_start(edit_form) }}' }}
+        {{ '{{ form_widget(edit_form) }}' }}
+        <input type="submit" class="btn btn-danger" value="Modifier" />
+    {{ '{{ form_end(edit_form) }}' }}
+
+{% set hide_edit, hide_delete = true, false %}
+{{ include('crud/views/others/record_actions.html.twig.twig') -}}
+{{ "{% endblock %}" }}
+{% endblock content_body %}

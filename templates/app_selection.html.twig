@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}Séléctionner Application{%endblock page_title %}
+{% block menu %}
+{% endblock menu %}
+{% block sidebar %}
+{% endblock sidebar %}
+{% block content_body %}
+ <div class='container'>   
+{%block content_title %}
+    <h1>{{software_name}}</h1>
+        Sélectionner une Boutique
+ {% endblock content_title %}
+
+<div class="row">
+
+        <h1 class="text-center text-bold">Sélectionnez l'application à accéder</h1>
+        
+            <div class='row text-bold'>
+            {%for shop in shops %}
+            <div class='col-lg-12 text-center bg-aqua  glyphicon glyphicon-shopping-cart text-bold'>
+                <h2><a href="{{path("authenticate_shop_access",{"id":shop.id})}}">{{shop.libelle}}</a></h2>
+            </div>
+             {%endfor%}
+        </div>
+
+        </div>
+
+</div>
+{% endblock content_body %}
+
+	

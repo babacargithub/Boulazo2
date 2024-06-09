@@ -1,0 +1,12 @@
+{% set menuItems=[
+    {"href":path("sortie_index"), "libelle":"Sorties"},
+    {"href":path("entree_index"), "libelle":"Entrées"},
+    {"href":path("compte_banque_index"), "libelle":"Banque"},
+    {"href":path("caisse_pro_index"), "libelle":"Caisses"}
+
+] %}
+{% if  is_granted("ROLE_ADMIN") %}
+    {% set plusOption={"href":path("caisse_pro_admin_index"),"libelle":"Admin"}%}
+    {% set menuItems=menuItems|merge([plusOption]) %}
+{%endif%}
+{% include "_menu_design.html.twig" with {"menuItems": menuItems} %}

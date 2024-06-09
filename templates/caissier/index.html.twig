@@ -1,0 +1,48 @@
+{% extends 'caissier/caissier_main_layout.html.twig' %}
+
+{% block content_body %}
+    <h1>Liste des caissiers</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Prenom</th>
+                <th>Nom</th>
+                <th>Tel</th>
+                <th>Adresse</th>
+                <th>Désactivé</th>
+                <th>Crée le</th>
+
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for caissier in caissiers %}
+            <tr>
+                <td><a href="{{ path('caissier_show', { 'id': caissier.id }) }}">{{ caissier.prenom }} - {{ caissier
+                        .nom }}</a></td>
+                <td>{{ caissier.tel }}</td>
+                <td>{{ caissier.adresse }}</td>
+                <td>{% if caissier.disabled %}Yes{% else %}No{% endif %}</td>
+                <td>{% if caissier.createdAt %}{{ caissier.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('caissier_show', { 'id': caissier.id }) }}">Voir détail</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('caissier_edit', { 'id': caissier.id }) }}">Modifier</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('caissier_new') }}">Créer un nouveau caissier</a>
+        </li>
+    </ul>
+{% endblock %}

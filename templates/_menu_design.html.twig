@@ -1,0 +1,87 @@
+
+  <header class="main-header">
+    <!-- Logo -->
+    <a href="/" class="logo">
+      <!-- mini logo for sidebar mini 50x50 pixels -->
+      <span class="logo-mini"><b>Golob</b>One</span>
+      <!-- logo for regular state and mobile devices -->
+      <span class="logo-lg"><b>{{company_name|slice(0, 3)}}</b>{% block app_name %}{{company_name|slice(3)}}{% endblock app_name %}</span>
+    </a>
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top">
+      <!-- Sidebar toggle button-->
+      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+        <span class="sr-only">Toggle navigation</span>
+      </a>
+
+      <div class="navbar-custom-menu pull-left">
+        <ul class="nav navbar-nav">
+          <!-- Messages: style can be found in dropdown.less-->
+          {% for menuItem in menuItems %}
+          <li class="dropdown messages-menu">
+            <a href="{{menuItem.href}}" class="dropdown-togglek" >
+              <i class="fa fa-folder-open"></i>
+             {{menuItem.libelle}}
+            </a>
+          </li>
+          {%endfor %}
+        </ul>
+      </div>
+      <div class="navbar-custom-menu pull-right">
+          <!-- User Account: style can be found in dropdown.less -->
+          <ul class="nav navbar-nav">
+          <li class="dropdown user user-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <img src="{{asset("admin-lte/dist/img/user2-160x160.jpg")}}" class="user-image" alt="User Image">
+             {% if app.user is not null %}
+                 <span class="hidden-xs">{{app.user.prenom~" "~app.user.nom|upper}}</span>
+                 {%endif%}
+            </a>
+            <ul class="dropdown-menu">
+              <!-- User image -->
+              <li class="user-header">
+                <img src="{{asset("admin-lte/dist/img/avatar.png")}}" class="img-circle" alt="User Image">
+
+                <p>
+                    {% if app.user is not null %}
+                  {{app.user.prenom~" "~app.user.nom|upper}} -Poste Employé
+                  {%endif%}
+                  <small>Depuis 2013</small>
+                </p>
+              </li>
+              <!-- Menu Body -->
+              <li class="user-body">
+                <div class="row">
+                    
+                  <div class="col-xs-6 text-center">
+                    <a href="{{path("shop_selection")}}">Changer Boutique</a>
+                  </div>
+                  <div class="col-xs-6 text-center">
+                    <a href="{{path("shop_selection")}}">Changer Caisse</a>
+                  </div>
+                  
+                  
+                </div>
+                <!-- /.row -->
+              </li>
+              <!-- Menu Footer-->
+              <li class="user-footer">
+			  <div class="pull-left">
+{#                  <a href="{{path("fos_user_security_logout")}}" class="btn btn-default btn-flat">Déconnexion</a>#}
+                  <a href="{{path("app_logout")}}" class="btn btn-default btn-flat">Déconnexion</a>
+                </div>
+                <div class="pull-right">
+                  <a href="{{path("caisse_pro_index")}}" class="btn btn-default btn-flat">Mon Compte</a>
+                </div>
+                
+              </li>
+            </ul>
+          </li>
+          <!-- Control Sidebar Toggle Button -->
+          <li>
+            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>

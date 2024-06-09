@@ -1,0 +1,52 @@
+{% extends 'shop/main_layout.html.twig' %}
+
+{% block content_body %}
+    <h1>Utilisateur de la boutique</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ shopUser.id }}</td>
+            </tr>
+            <tr>
+                <th>Disabled</th>
+                <td>{% if shopUser.disabled %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Disabledat</th>
+                <td>{% if shopUser.disabledAt %}{{ shopUser.disabledAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Locked</th>
+                <td>{% if shopUser.locked %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Lockedat</th>
+                <td>{% if shopUser.lockedAt %}{{ shopUser.lockedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Lockeduntil</th>
+                <td>{% if shopUser.lockedUntil %}{{ shopUser.lockedUntil|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Lastlogin</th>
+                <td>{% if shopUser.lastLogin %}{{ shopUser.lastLogin|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('shop_user_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('shop_user_edit', { 'id': shopUser.id }) }}">Modifier</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Supprimer">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

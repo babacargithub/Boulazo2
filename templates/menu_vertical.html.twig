@@ -1,0 +1,16 @@
+
+{% for menu in menu_vertical %}
+    
+<li><a class="go_shop_vertical_menu"{% if menu.href is defined %} href="{{  menu.href }}{%endif%}">{{menu.libelle }}</a>
+
+{% if menu.dropdown is defined %}
+    <ul class="dropdown-menu">
+    {% for menu in menu.dropdown %}
+<li><a class="go_shop_vertical_menu" href="{{  menu.href }}">{{
+menu.libelle }}</a>
+{%endfor %}
+    </ul>
+{% endif %}
+</li>
+{% endfor %}
+

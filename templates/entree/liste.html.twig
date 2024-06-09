@@ -1,0 +1,36 @@
+    {% extends "entree/main_layout.html.twig"%}
+{% block content_body %}          Enttrées
+        Total des entrées {% if total_sortie is defined%}{{total_sortie|nombre()}}
+        {%endif%}
+            <h2>Résumé sortie</h2>
+            
+        {% if entrees is defined %}
+            <table class="table table-bordered table-striped">
+                <tr >
+                        
+                    <th>Montant</th>
+                    <th>Libellé</th>
+                    <th>Justifications</th>
+                    <th>Date</th>
+                    <th>Effectué par</th>
+                    <th>Opérations</th>
+                </tr>
+                {% for entree in entrees %}
+                    <tr id="row-{{ entree.id }}">
+                        <td>{{entree.montant|nombre() }}</td>
+                        <td>{{ entree.typeEntree.libelle}}</td>
+                        <td>{{ entree.libelle }}</td>
+                        <td>{{ entree.date.format('d/m/Y H:i')}}</td>
+                        <td>BABACAR</td>
+                        
+                         <td>
+                           <a class="update_action" id="{{ entree.id }}" href="{{ path('entree_edit', {'id': entree.id}) }}">Modifier</a>
+                            <a class="annuler_action" id="{{ entree.id }}" href="{{ path('entree_delete', {'id': entree.id}) }}">Annuler</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+            </table>
+            {% else %}
+                <span>Liste undefined</span>
+    {% endif %}
+    {% endblock %}

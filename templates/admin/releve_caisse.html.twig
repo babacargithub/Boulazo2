@@ -1,0 +1,52 @@
+{% extends 'caisse/caisse_main_layout.html.twig' %}
+
+{% block content_body %}
+    
+    <h1>Relevé {{caisse.libelle}} pour la période du {{ app.request.get('date_debut')}} à 00h:01 au {{ app.request.get('date_fin')}} à 23h:59</h1>
+{% set total_sortie,total_entree=0,0 %}
+    <table>
+        <tbody>
+            <tr>
+               <th>Date</th>
+               <th>Type Opération</th>
+                <th>Montant</th>
+                <th>Débit</th>
+                <th>Crédit</th>
+               
+            </tr>
+            
+            {% for operation in operations %}
+                <tr>
+                    <td>{{operation.dateOp.format('d-m-Y H:i')}}</td>
+                    <td>{% if operation.typeOp==constant('App\\Entity\\TypeOperation::ENTREE_LIQUIDE')%}
+                        ENTREE LIQUIDE
+                        {% elseif operation.typeOp==constant('App\\Entity\\TypeOperation::SORTIE_LIQUIDE')%}
+                        SORTIE LIQUIDE
+                        {%endif %}
+                    </td>
+                    <td>{% if operation.typeOp==constant('App\\Entity\\TypeOperation::ENTREE_LIQUIDE')%}
+                        {{operation.entree.typeEntree.libelle}}
+                        {% elseif operation.typeOp==constant('App\\Entity\\TypeOperation::SORTIE_LIQUIDE')%}
+                        {{operation.sortie.typeSortie.libelle}}
+                        {%endif %}</td>
+                    <td> {% if operation.sortie is not null %}
+                        {% set total_sortie=total_sortie+operation.montant%}
+                   {{operation.montant|nombre()}}
+                    {%endif %}</td>
+                    <td> {% if operation.entree is not null %}
+                    {{operation.montant|nombre()}}
+                    {% set total_entree=total_entree+operation.montant%}
+                    {%endif %}
+                    </td>
+                    
+                </tr>
+                {%endfor %}
+                    <tr><th colspan="3">Totaux</th>
+                        <th>{{total_sortie|nombre()}}</th>
+                        <th>{{total_entree|nombre()}}</th>
+                    </tr>
+        </tbody>
+    </table>
+
+    
+{% endblock %}

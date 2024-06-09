@@ -1,0 +1,45 @@
+{% extends 'comptebanque/main_layout.html.twig' %}
+
+{% block content_body %}
+    <h1>Détails de l'opération bancaire</h1>
+
+    <table>
+        <tbody>
+            
+            <tr>
+                <th>Montant</th>
+                <td>{{ opBanque.montant|nombre() }}</td>
+            </tr>
+            <tr>
+                <th>Motif</th>
+                <td>{{ opBanque.justif }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{% if opBanque.date %}{{ opBanque.date|date('d-m-Y H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Caisse</th>
+                <td>{{ opBanque.caisse }}</td>
+            </tr>
+            <tr>
+                <th>Effectué par</th>
+                <td>{{ opBanque.user }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('operation_banque_index') }}">Retour à la liste</a>
+        </li>
+        <li>
+            <a href="{{ path('operation_banque_edit', { 'id': opBanque.id }) }}">Modifier</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Supprimer">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

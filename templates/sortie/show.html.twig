@@ -1,0 +1,71 @@
+{% extends 'sortie/sortie_main_layout.html.twig' %}
+
+{% block content_body %}
+    <div class="col-lg-6">
+    <h1>Sortie</h1>
+
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+                <th>Beneficiaire</th>
+                <td>{{ sortie.beneficiaire }}</td>
+            </tr>
+            
+            <tr>
+                <th>Montant</th>
+                <td>{{ sortie.montant }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{% if sortie.date %}{{ sortie.date|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ sortie.type }}</td>
+            </tr>
+            <tr>
+                <th>Motif</th>
+                <td>{{ sortie.motif }}</td>
+            </tr>
+            <tr>
+                <th>Commentaire</th>
+                <td>{{ sortie.commentaire }}</td>
+            </tr>
+            <tr>
+                <th>Type de Sortie</th>
+                <td>{{ sortie.typeSortie }}</td>
+            </tr>
+            <tr>
+                <th>Caisse</th>
+                <td>{{ sortie.caisse }}</td>
+            </tr>
+            <tr>
+                <th>Effectué par</th>
+                <td>{{ sortie.user.prenom }}</td>
+            </tr>
+            <tr>
+                <th>Justificatif </th>
+                
+                <td>{% if sortie.justifUrl is not null %}
+                    <a href="{{ sortie.justifUrl }}">Afficher le Justificatif </a>
+                    {% else %}Aucun Justificatif pour cette opération!
+                {%endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        
+        <li>
+            <a href="{{ path('sortie_edit', { 'id': sortie.id }) }}">Modifier</a>
+        </li><li>
+            <a href="{{ path('sortie_index') }}">Retour à la liste</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Supprimer">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+                </div>
+{% endblock %}

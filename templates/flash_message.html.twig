@@ -1,0 +1,8 @@
+{% if msg is defined  and msg is not null %}
+    {% set data={"code":1,"message":msg} %}
+    {{ data|json_encode() }}
+{% elseif errorMsg is defined and errorMsg is not null %}
+    {% set data={"code":0,"message":errorMsg} %}
+    {{ data|json_encode() }}
+    
+    {% endif %}

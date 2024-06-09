@@ -1,0 +1,36 @@
+{% extends 'caisse/caisse_main_layout.html.twig' %}
+
+{% block content_body %}
+    <h1>Résumé journalier Caisse {{caisse.libelle}} </h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Date</th>
+                <th>Solde Initial</th>
+                <th>Total Sortie</th>
+                <th>Total Entrée</th>
+                <th>Solde Opération</th>
+                <th>Solde Fin Journée</th>
+                <th>Actions</th>
+            </tr>
+            
+            {% for donnee in donnees %}
+            <tr>
+                <td>{{donnee.date}}</td>
+                <td>{{donnee.soldeDebutJournee|nombre()}}</td>
+                <td>{{donnee.totalSortie|nombre()}}</td>
+                <td>{{donnee.totalEntree|nombre()}}</td> 
+                <td>{{(donnee.totalEntree-donnee.totalSortie)|nombre()}}</td>
+                <td>{{donnee.soldeFinJournee|nombre()}}</td>
+             
+                
+                <td><a href="{{ path('releve_caisse', { 'id': caisse.id, 'date_debut':donnee.date,'date_fin':donnee.date }) }}">Voir Relevé Jour</a></td>
+            </tr>
+            {%endfor %}
+            
+        </tbody>
+    </table>
+
+    
+{% endblock %}

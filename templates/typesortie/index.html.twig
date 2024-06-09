@@ -1,0 +1,41 @@
+{% extends 'sortie/sortie_main_layout.html.twig' %}
+
+{% block content_body %}
+    <h1>Liste des types de sorties</h1>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Libelle</th>
+                <th>Commentaire</th>
+                <th>Categorie</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for typeSortie in typeSorties %}
+            <tr>
+                <td><a href="{{ path('type_sortie_show', { 'id': typeSortie.id }) }}">{{ typeSortie.libelle }}</a></td>
+                <td>{{ typeSortie.commentaire }}</td>
+                <td>{{ typeSortie.categorie }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('type_sortie_show', { 'id': typeSortie.id }) }}">Afficher</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('type_sortie_edit', { 'id': typeSortie.id }) }}">Modifier</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('type_sortie_new') }}">Créer nouveau type de sortie</a>
+        </li>
+    </ul>
+{% endblock %}

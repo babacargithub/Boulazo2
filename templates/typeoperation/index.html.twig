@@ -1,0 +1,43 @@
+{% extends 'layout.html.twig' %}
+
+{% block content_body %}
+    <h1>Typeoperations list</h1>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Libelle</th>
+                <th>Commentaire</th>
+                <th>Categorie</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for typeOperation in typeOperations %}
+            <tr>
+                <td><a href="{{ path('type_operation_show', { 'id': typeOperation.id }) }}">{{ typeOperation.id }}</a></td>
+                <td>{{ typeOperation.libelle }}</td>
+                <td>{{ typeOperation.commentaire }}</td>
+                <td>{{ typeOperation.categorie }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('type_operation_show', { 'id': typeOperation.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('type_operation_edit', { 'id': typeOperation.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('type_operation_new') }}">Create a new typeOperation</a>
+        </li>
+    </ul>
+{% endblock %}

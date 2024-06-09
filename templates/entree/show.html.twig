@@ -1,0 +1,56 @@
+{% extends 'entree/main_layout.html.twig' %}
+
+{% block content_body %}
+    <h1>Entrée</h1>
+
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+                <th>Auteur</th>
+                <td>{{ entree.auteur }}</td>
+            </tr>
+            <tr>
+                <th>Id</th>
+                <td>{{ entree.id }}</td>
+            </tr>
+            <tr>
+                <th>Libelle</th>
+                <td>{{ entree.libelle }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{% if entree.date %}{{ entree.date|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Montant</th>
+                <td>{{ entree.montant }}</td>
+            </tr>
+            <tr>
+                <th>Commentaire</th>
+                <td>{{ entree.commentaire }}</td>
+            </tr>
+            <tr>
+                <th>Typeentree</th>
+                <td>{{ entree.typeEntree }}</td>
+            </tr>
+            <tr>
+                <th>Caisse</th>
+                <td>{{ entree.caisse }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('entree_index') }}">Retour à la liste</a>
+        </li>
+        <li>
+            <a href="{{ path('entree_edit', { 'id': entree.id }) }}">Modifier</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Supprimer">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

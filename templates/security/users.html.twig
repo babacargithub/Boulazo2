@@ -1,0 +1,33 @@
+{%  extends "admin/main_layout.html.twig" %}
+{% block title %}Log in!{% endblock %}
+
+{% block content_body %}
+    <h1>Liste des utilisateurs</h1>
+    <a href="{{ path('app_register') }}">Créer un nouvel utilisateur</a>
+   <table>
+         <thead>
+              <tr>
+                <th>Id</th>
+                <th>Nom complet</th>
+                <th>Nom d'utilisateur</th>
+                <th>Roles</th>
+                <th>Actions</th>
+              </tr>
+         </thead>
+         <tbody>
+              {% for user in users %}
+                <tr>
+                     <td>{{ user.id }}</td>
+                     <td>{{ user.prenom }}&nbsp;{{ user.nom }}
+                     </td>
+                     <td>{{ user.username }}</td>
+                     <td>{{ user.roles|json_encode }}</td>
+                     <td>
+                          <a href="{{ path('users_index', {'id': user.id}) }}">show</a>
+                          <a href="{{ path('users_index', {'id': user.id}) }}">edit</a>
+                     </td>
+                </tr>
+              {% endfor %}
+         </tbody>
+   </table>
+{% endblock %}

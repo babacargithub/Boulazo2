@@ -1,0 +1,68 @@
+{% extends 'caisse_user/main_layout.html.twig' %}
+
+{% block content_body %}
+    <h1>Caisseuser</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ caisseUser.id }}</td>
+            </tr>
+            <tr>
+                <th>User</th>
+                <td>{{ caisseUser.user }}</td>
+            </tr>
+            <tr>
+                <th>Caisse</th>
+                <td>{{ caisseUser.caisse }}</td>
+            </tr>
+            <tr>
+                <th>Allowed</th>
+                <td>{% if caisseUser.allowed %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Openningat</th>
+                <td>{% if caisseUser.openningAt %}{{ caisseUser.openningAt|date('H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Closingat</th>
+                <td>{% if caisseUser.closingAt %}{{ caisseUser.closingAt|date('H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Accesslevel</th>
+                <td>{{ caisseUser.accessLevel }}</td>
+            </tr>
+            <tr>
+                <th>Comments</th>
+                <td>{{ caisseUser.comments }}</td>
+            </tr>
+            <tr>
+                <th>Createdat</th>
+                <td>{% if caisseUser.createdAt %}{{ caisseUser.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Deleted</th>
+                <td>{% if caisseUser.deleted %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Deletedat</th>
+                <td>{% if caisseUser.deletedAt %}{{ caisseUser.deletedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('caisse_user_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('caisse_user_edit', { 'id': caisseUser.id }) }}">Modifier</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Supprimer">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

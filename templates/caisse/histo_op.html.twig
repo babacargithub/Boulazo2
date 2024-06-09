@@ -1,0 +1,49 @@
+{% extends 'caisse/caisse_main_layout.html.twig' %}
+
+{% block content_body %}
+    <table> 
+        <tr>
+            <th>Caisse</th>
+            <th>Opération</th>
+            <th>Libellé</th>
+            <th>Montant</th>
+            <th>Ancien Solde</th>
+            <th>Nouveau Solde</th>
+            <th>Date</th>
+            <th>Caissier</th>
+            <th>Action</th>
+         </tr>
+    {# les oprérations de sortie et d'entrée sont stockés dans le tableau. Donc des tests seront effectués pour 
+    détecter type d'entité à traiter et par conséquent adapter les données en commun tels que l'Url pour afficher 
+    les détails de l'opération, le libellé de l'opération le formattage de la ligne dans le tableau etc #}
+    {% for op in operations %}   
+     {% set linkToShowOp,typeOpLibelle,OpType="","",""%}
+    {% if op.typeOp==constant('App\\Entity\\TypeOperation::SORTIE_LIQUIDE')%}
+        {% set OpType="sortie" %}
+        {% set typeOpName="SORTIE LIQUIDE" %}
+        
+            {% if op.sortie is not null %}{% set linkToShowOp=path("sortie_show",{"id":op.sortie.id})%}{%endif%}
+             {% if op.operation is not null %} {% set typeOpLibelle=op.operation.typeSortie.libelle%}{%endif%}
+  {% elseif op.typeOp==constant('App\\Entity\\TypeOperation::ENTREE_LIQUIDE')%}
+      {% set typeOpName="ENTREE LIQUIDE" %}
+      {% set OpType="entree"%}
+      
+            {% if op.entree is not null %}{% set linkToShowOp=path("entree_show",{"id":op.entree.id})%}{%endif%}      
+                {% if op.operation is not null %} {% set typeOpLibelle=op.operation.typeEntree.libelle%}{%endif%} 
+       {%endif%}
+       
+    <tr class="row_{{OpType}}"> <td>{{op.caisse}}</td>
+       <td>{{typeOpName}}</td>
+        <td>{{typeOpLibelle}}</td>
+        
+        <td>{{op.montant|nombre()}}</td>
+        <td>{{op.ancienSolde|nombre()}}</td>
+        <td>{{op.nouveauSolde|nombre()}}</td>
+        <td>{{op.dateOp.format('d-m-Y à H:i')}}</td>
+        <td>{{op.user.prenom}}</td>
+        <td> {% if op.deleted %}Annulé{%else%}<a href="{{linkToShowOp}}">Visualiser{%endif%}</td>
+    </tr>
+        {% endfor %}
+    </table>
+    {%endblock %}
+    

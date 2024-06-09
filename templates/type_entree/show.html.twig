@@ -1,0 +1,44 @@
+{% extends 'entree/main_layout.html.twig' %}
+
+{% block content_body %}
+    <h1>Typeentree</h1>
+
+    <table class="table table-bordered table-striped">
+        <tbody>
+            <tr>
+                <th>Produit</th>
+                <td>{% if typeEntree.produit %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Id</th>
+                <td>{{ typeEntree.id }}</td>
+            </tr>
+            <tr>
+                <th>Libelle</th>
+                <td>{{ typeEntree.libelle }}</td>
+            </tr>
+            <tr>
+                <th>Commentaire</th>
+                <td>{{ typeEntree.commentaire }}</td>
+            </tr>
+            <tr>
+                <th>Categorie</th>
+                <td>{{ typeEntree.categorie }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('type_entree_index') }}">Retour à la liste</a>
+        </li>
+        <li>
+            <a href="{{ path('type_entree_edit', { 'id': typeEntree.id }) }}">Modifier</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Supprimer">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,156 @@
+#golob-one-main-menu.navbar-default .navbar-brand {
+    color: rgba(119, 119, 119, 1);
+}
+#golob-one-main-menu.navbar-default {
+    font-size: 16px;
+    background-color: rgba(47, 182, 235, 1);
+    background: -webkit-linear-gradient(top, rgba(248, 248, 248, 1) 0%, rgba(47, 182, 235, 1) 100%);
+    background: linear-gradient(to bottom, rgba(248, 248, 248, 1) 0%, rgba(47, 182, 235, 1) 100%);
+    border-width: 1px;
+    border-radius: 4px;
+}
+#golob-one-main-menu.navbar-default .navbar-nav>li>a {
+    color: rgba(250, 250, 255, 1);
+    background-color: rgba(51, 139, 240, 1);
+}
+#golob-one-main-menu.navbar-default .navbar-nav>li>a:hover,
+#golob-one-main-menu.navbar-default .navbar-nav>li>a:focus {
+    color: rgba(20, 17, 17, 1);
+    background-color: rgba(245, 245, 245, 1);
+}
+#golob-one-main-menu.navbar-default .navbar-nav>.active>a,
+#golob-one-main-menu.navbar-default .navbar-nav>.active>a:hover,
+#golob-one-main-menu.navbar-default .navbar-nav>.active>a:focus {
+    color: rgba(3, 0, 0, 1);
+    background-color: rgba(231, 231, 231, 1);
+}
+#golob-one-main-menu.navbar-default .navbar-toggle {
+    border-color: #ddd;
+}
+#golob-one-main-menu.navbar-default .navbar-toggle:hover,
+#golob-one-main-menu.navbar-default .navbar-toggle:focus {
+    background-color: #ddd;
+}
+#golob-one-main-menu.navbar-default .navbar-toggle .icon-bar {
+    background-color: #888;
+}
+#golob-one-main-menu.navbar-default .navbar-toggle:hover .icon-bar,
+#golob-one-main-menu.navbar-default .navbar-toggle:focus .icon-bar {
+    background-color: #2fb6eb;
+}
+.design_vertical_menu{
+border-right: 5px solid gray;
+background-color: rgba(47, 182, 235, 1);
+    background: -webkit-linear-gradient(top, rgba(248, 248, 248, 1) 0%, rgba(47, 182, 235, 1) 100%);
+    background: linear-gradient(to bottom, rgba(248, 248, 248, 1) 0%, rgba(47, 182, 235, 1) 100%);
+   
+margin-top: 0px;
+padding-top: 50px;
+margin-left: 70px;
+height: 500px;
+}
+body
+{
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#e1ffff+0,e1ffff+7,e1ffff+12,fdffff+22,e6f8fd+34,c8eefb+54,bee4f8+71,b1d8f5+84 */
+background: #e1ffff; /* Old browsers */
+background: -moz-linear-gradient(top,  #e1ffff 0%, #e1ffff 7%, #e1ffff 12%, #fdffff 22%, #e6f8fd 34%, #c8eefb 54%, #bee4f8 71%, #b1d8f5 84%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e1ffff), color-stop(7%,#e1ffff), color-stop(12%,#e1ffff), color-stop(22%,#fdffff), color-stop(34%,#e6f8fd), color-stop(54%,#c8eefb), color-stop(71%,#bee4f8), color-stop(84%,#b1d8f5)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #e1ffff 0%,#e1ffff 7%,#e1ffff 12%,#fdffff 22%,#e6f8fd 34%,#c8eefb 54%,#bee4f8 71%,#b1d8f5 84%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #e1ffff 0%,#e1ffff 7%,#e1ffff 12%,#fdffff 22%,#e6f8fd 34%,#c8eefb 54%,#bee4f8 71%,#b1d8f5 84%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #e1ffff 0%,#e1ffff 7%,#e1ffff 12%,#fdffff 22%,#e6f8fd 34%,#c8eefb 54%,#bee4f8 71%,#b1d8f5 84%); /* IE10+ */
+background: linear-gradient(to bottom,  #e1ffff 0%,#e1ffff 7%,#e1ffff 12%,#fdffff 22%,#e6f8fd 34%,#c8eefb 54%,#bee4f8 71%,#b1d8f5 84%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e1ffff', endColorstr='#b1d8f5',GradientType=0 ); /* IE6-9 */
+}
+.menu_vertical{
+margin-top: 0px;
+ border-top: 10px;}
+ .contenu
+ {
+ min-height: 500px;
+ padding-left: 50px;
+ margin-left: 20px;
+ border: solid 0.5px gray;
+ /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,f6f6f6+47,ededed+100;White+3D+%231 */
+background: #ffffff; /* Old browsers */
+background: -moz-linear-gradient(-45deg,  #ffffff 0%, #f6f6f6 47%, #ededed 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#ffffff), color-stop(47%,#f6f6f6), color-stop(100%,#ededed)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(-45deg,  #ffffff 0%,#f6f6f6 47%,#ededed 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(-45deg,  #ffffff 0%,#f6f6f6 47%,#ededed 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(-45deg,  #ffffff 0%,#f6f6f6 47%,#ededed 100%); /* IE10+ */
+background: linear-gradient(135deg,  #ffffff 0%,#f6f6f6 47%,#ededed 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+ 
+ 
+ /*===laoding*/
+ 
+ .loader{
+  margin: 50px auto;
+  text-indent: -9999em;
+  width: 11em;
+  font-size: 10px;
+  height: 11em;
+  border-radius: 50%;
+  background: #ffffff;
+  background: -moz-linear-gradient(left, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
+  background: -webkit-linear-gradient(left, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
+  background: -o-linear-gradient(left, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
+  background: -ms-linear-gradient(left, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
+  background: linear-gradient(to right, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
+  position: relative;
+  -webkit-animation: load3 1.4s infinite linear;
+  animation: load3 1.4s infinite linear;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+}
+.loader:before {
+  width: 50%;
+  height: 50%;
+  background: #ffffff;
+  border-radius: 100% 0 0 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: '';
+}
+.loader:after {
+  background: #0dc5c1;
+  width: 75%;
+  height: 75%;
+  border-radius: 50%;
+  content: '';
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+ }
+ #loader {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  width: 150px;
+  height: 150px;
+  margin: -75px 0 0 -75px;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

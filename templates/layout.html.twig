@@ -1,0 +1,75 @@
+{% extends "base.html.twig" %}
+    {% block menu %}
+        {% include "_menu.html.twig" %}
+    {% endblock menu %}
+    {# Left side column. contains the logo and sidebar -->
+ {# include side bar#}
+    {% block sidebar %}
+{#        Render menuVertical action from MainCrontroller#}
+        {{ render(controller('App\\Controller\\MainController::baseVerticalAction'))}}
+
+    {% endblock sidebar %}
+ {% block active_page %}
+     Caisse Active {{app.session.get('connected_caisse')}}
+ {%endblock %}
+{% block content_body %}
+    <h2>Bienvenue dans l'application pour la gestion des Caisses de  {{company_name}}</h2>
+    <h1>Consignes de sécurité et récommendations</h1>
+    <ul>
+        <li><h3>Ne pas ouvrir cette application aux yeux des clients</h3></li>
+        <li><h3>Ne pas ouvrir sur un appareil étranger à l'entreprise</h3></li>
+        <li><h3>Ne pas communiquer votre mot de passe aux autres collègues</h3></li>
+        <li><h3>Ne pas oubliez de vous déconnecter à chaque fois que vous quittez votre poste de travail</h3></li>
+
+
+    </ul>
+{% endblock  content_body %}
+
+
+ {% block javascripts %}
+     {{parent()}}
+     <script src="{{asset("js/go_shop_functions.js")}}"></script>
+{#     <script src="{{asset("js/golob_one_db_js.js")}}"></script>#}
+
+ {% endblock javascripts %}
+
+{% block javascript_code %}
+    <script type="text/javascript">
+        //alert('jjdjjd');
+        var couleur_maron="#ad7900";
+        var couleur_maron_fonce="#7a5500";
+        var couleur_bleu_fonce="#367faf";
+        var couleur_bleu_fonce_titre='#3C8DBC';
+
+
+        $('table').addClass('table table-hovered table-striped');
+        $('input[type=submit]').addClass('btn').addClass('btn-danger');
+        $('input[type!=submit],select,textarea').css('background-color',couleur_maron )
+            .css('color', 'white')
+            .css('font-size', '16px')
+            .css('font-weight', 'bold');
+        $('h1').css('color', couleur_maron_fonce)
+            .css('font-size', '20px')
+            .css('font-style', 'italic')
+            .css('font-weight', 'bold');
+
+        $('label').css("color","#3C8DBC");
+        $('.row_entree').css("background-color","#92e5ab");
+        $('input[type=submit]').each(function() {
+            var text = $(this).val();
+            $(this).val(text.replace('Create', 'Enregistrer'));
+        });
+        $('table a').each(function() {
+            var text = $(this).text();
+            $(this).text(text.replace('Back to the list', 'Retour à la Liste'));
+        });
+        $('table a').each(function() {
+            var text = $(this).text();
+            $(this).text(text.replace('show', 'Détails'));
+        });
+        $('table a').each(function() {
+            var text = $(this).text();
+            $(this).text(text.replace('edit', 'Modifier')); });
+        $("tr ul li").css('display','inline').css('margin','2px');
+    </script>
+{% endblock javascript_code %}
